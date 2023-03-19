@@ -1,0 +1,2 @@
+When we will have a situation in which we want to traverse many strings togather or some string which can be answer togather in that case we can use trie data structure. Because 
+we generally take same string for comman prefix.
