@@ -1,0 +1,72 @@
+struct Node{
+    bool flag;
+    vector<Node*> child;
+    Node()
+    {
+        flag=false;
+        child.resize(26,NULL);
+    }
+};
+
+class Trie {
+private:
+    Node* root;
+public:
+    Trie() {
+        root=new Node();
+    }
+    
+    void insert(string word) {
+        Node* curr=root;
+        for(int i=0;i<word.size();i++)
+        {
+            int temp=word[i]-'a';
+            if(curr->child[temp]!=NULL)
+            {
+                curr=curr->child[temp];
+            }
+            else
+            {
+                Node *n=new Node();
+                curr->child[temp]=n;
+                curr=curr->child[temp];
+            }
+        }
+        curr->flag=true;
+    }
+    
+    bool search(string word) {
+        Node* curr=root;
+        for(int i=0;i<word.size();i++)
+        {
+            int temp=word[i]-'a';
+            if(curr->child[temp]==NULL)
+            {
+                return false;
+            }
+            else
+            {
+                curr=curr->child[temp];
+            }
+        }
+        if(curr->flag==true) return true;
+        return false;
+    }
+    
+    bool startsWith(string prefix) {
+        Node* curr=root;
+        for(int i=0;i<prefix.size();i++)
+        {
+            int temp=prefix[i]-'a';
+            if(curr->child[temp]==NULL)
+            {
+                return false;
+            }
+            else
+            {
+                curr=curr->child[temp];
+            }
+        }
+        return true;
+    }
+};
